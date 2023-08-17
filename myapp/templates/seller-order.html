@@ -1,0 +1,106 @@
+{% extends 'seller-header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://js.stripe.com/v3/"></script>
+  </head>
+  <body class="goto-here">
+		
+    <!-- END nav -->
+
+    <!-- Page Header Start -->
+    <div class="container-fluid bg-secondary mb-5">
+        <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 200px">
+            <h1 class="font-weight-semi-bold text-uppercase mb-3">View Orders</h1>
+            <div class="d-inline-flex">
+                <p class="m-0"><a href="/">Home</a></p>
+                <p class="m-0 px-2">-</p>
+                <p class="m-0">Seller View Orders</p>
+            </div>
+        </div>
+    </div>
+    <!--  End Page Header -->
+
+    <section class="ftco-section bg-light">
+    	<div class="container">
+    		<div class="row">
+    			<div class="col-md-8 col-lg-10 order-md-last">
+    				<div class="row">
+		    			{% if msg %}
+                          <b style="color: blue">{{msg}}</b>
+                        {% endif %}
+                        {% if orders %}
+		    			{% for i in orders %}
+		    			<div class="col-sm-12 col-md-12 col-lg-4 ftco-animate d-flex">
+		    				<div class="product d-flex flex-column">
+		    					<a href="#" class="img-prod"><img class="img-fluid" src="{{i.product.product_pic.url}}" alt="Colorlib Template" style="width: 500px; height: 200px;">
+		    						<div class="overlay"></div>
+		    					</a>
+		    					<div class="text py-3 pb-4 px-3">
+		    						<div class="d-flex">
+		    							<div class="cat">
+				    						<span>{{i.product.product_brand}}</span>
+				    					</div>
+				    					
+			    					</div>
+		    						<h3><a href="#">{{i.product.product_name}}</a></h3>
+
+		    						<div class="pricing">
+			    						<p class="price"><span>Product Price: ₹{{i.product.product_price}}</span></p>
+			    					</div>
+
+			    					<div class="pricing">
+			    						<form name="change qty" method="post" action="{% url 'change-qty' %}"> 
+			    						    {% csrf_token %}
+			    							<p class="price">
+			    								<span>
+			    									<input type="hidden" name="cid" value="{{i.pk}}">
+			    									Product Qty: <input type="number" name="product_qty" value="{{i.product_qty}}" min="1" max="10" onchange="this.form.submit();" readonly>
+			    								</span>
+			    							</p>
+
+			    						</form>
+			    					</div>
+
+			    					<div class="pricing">
+			    						<p class="price"><span>Total Price: ₹{{i.total_price}}</span></p>
+			    					</div>
+			    					<p>
+		    						<div>
+										<a href="{% url 'seller-product-details' pk=i.product.pk %}" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>Seller Product Details</a>
+									</div>
+		    					</div>
+		    				</div>
+		    			</div>
+		    			{% endfor %}
+                        {% else %}
+                           <h1>View Orders Is Empty</h1>
+                        {% endif %} 
+                      </div>
+		    		</div>
+		    	</div>
+
+		    	<div class="col-md-4 col-lg-2">
+		    	  <div class="sidebar">
+					
+                  </div>
+               </div>
+			</div>					
+		</div>
+		</div>
+    </div>
+    		</div>
+    	</div>
+    </section>
+		
+
+    
+  </body>
+</html>
+{% endblock %}
+
+
+
+

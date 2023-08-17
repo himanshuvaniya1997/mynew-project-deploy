@@ -1,0 +1,107 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+	<head>
+    </head>
+	<body>
+		
+
+		<!-- SECTION -->
+		<div class="section">
+			<!-- container -->
+			<div class="container">
+
+				<!-- Page Header Start -->
+			    <div class="container-fluid bg-secondary mb-5">
+			        <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 200px">
+			            <h1 class="font-weight-semi-bold text-uppercase mb-3">My Orders</h1>
+			            <div class="d-inline-flex">
+			                <p class="m-0"><a href="/">Home</a></p>
+			                <p class="m-0 px-2">-</p>
+			                <p class="m-0">My Orders</p>
+			            </div>
+			        </div>
+			    </div>
+			    <!--  End Page Header -->
+
+				<!-- row -->
+				<div class="row">
+
+					<!-- section title -->
+					<div class="col-md-12">
+						{% if carts %}
+						    <h3 class="title text-center">View Orders</h3>
+						{% else %}
+						    <h3 class="title">No Items In Your Orders</h3>
+					    {% endif %}
+					</div>
+				</div>
+					<!-- /section title -->
+
+					<!-- Products tab & slick -->
+					<div class="col-md-12">
+						<div class="row">
+							<div class="products-tabs">
+								<!-- tab -->
+								<div id="tab1" class="tab-pane active">
+									<div class="products-slick" data-nav="#slick-nav-1">
+										{% for i in carts %}
+										<!-- product -->
+										<div class="product">
+											<div class="product-img">
+												<img src="{{i.product.product_pic.url}}" alt="" style="width:200px;height:200px;">
+												
+											</div>
+											<div class="product-body">
+												<p class="product-category">{{i.product.product_category}}</p>
+												
+												<h3 class="product-name"><a href="#">{{i.product.product_name}}</a></h3>
+												
+												<h4 class="product-price">Price : {{i.product.product_price}} </h4>
+												
+												<form name="change_qty" method="post" action="{% url 'change-qty' %}">
+													{% csrf_token %}
+													<h4 class="product-price">Quantity :</h4> <input type="number" name="product_qty" value="{{i.product_qty}}" min="1" max="10" onchange="this.form.submit();" readonly>
+													<input type="hidden" name="cid" value="{{i.pk}}">
+												</form>
+
+												<h4 class="product-price">Total Price : {{i.total_price}} </h4>
+
+
+												{% if request.session.email %}
+												<div>
+													<a href="{% url 'product-details' pk=i.product.pk %}" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>Product Details</a>
+												</div>
+												
+												{% else %}
+													<a href="{% url 'login' %}"><input type="button" value="Login" class="btn btn-primary"></a>
+												{% endif %}
+												
+											</div>
+										</div>
+										<h4>--------------</h4>
+										<!-- /product -->
+										{% endfor %}
+										
+									</div>
+									<div id="slick-nav-1" class="products-slick-nav"></div>
+								</div>
+								<!-- /tab -->
+							</div>
+						</div>
+			<!--			<h1>Net Price To Pay : {{net_price}}</h1>   -->
+					</div>
+					<!-- Products tab & slick -->
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /SECTION -->
+
+		
+	</body>
+</html>
+{% endblock %}

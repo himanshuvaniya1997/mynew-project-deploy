@@ -1,0 +1,85 @@
+{% extends 'seller-header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+  </head>
+  <body class="goto-here">
+		
+    <!-- END nav -->
+
+    <!-- Page Header Start -->
+    <div class="container-fluid bg-secondary mb-5">
+        <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 200px">
+            <h1 class="font-weight-semi-bold text-uppercase mb-3">Add Product</h1>
+            <div class="d-inline-flex">
+                <p class="m-0"><a href="/">Home</a></p>
+                <p class="m-0 px-2">-</p>
+                <p class="m-0">Seller Add Product</p>
+            </div>
+        </div>
+    </div>
+    <!--  End Page Header -->
+
+    <section class="ftco-section contact-section bg-light">
+      <div class="container">
+      	
+        <div class="row block-6">
+          <div class="col-md-6 order-md-last d-flex">
+            {% if msg %}
+              <b style="color: blue">{{msg}}</b>
+            {% endif %}
+            <form action="{% url 'seller-add-product' %}" class="bg-white p-5 contact-form" method="post" enctype="multipart/form-data">
+              {% csrf_token %}
+              <div class="form-group">
+                <select name="product_category" class="form-control">
+                  <option>....Select Category....</option>
+                  <option value="Shirts">Shirts</option>
+                  <option value="Jeans">Jeans</option>
+                  <option value="T-Shirts">T-Shirts</option>
+                  <option value="Jackets">Jackets</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <select name="product_brand" class="form-control">
+                  <option>....Select Brand....</option>
+                  <option value="Levi's">Levi's</option>
+                  <option value="Jack & Jones">Jack & Jones</option>
+                  <option value="Zara">Zara</option>
+                  <option value="Allen Solly">Allen Solly</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="Product Name" name="product_name">
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="Product Price" name="product_price">
+              </div>
+              <div class="form-group">
+                <select name="product_size" class="form-control">
+                  <option>....Select Size....</option>
+                  <option value="S">S</option>
+                  <option value="M">M</option>
+                  <option value="L">L</option>
+                  <option value="XL">XL</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                Product Pic<input type="file" class="form-control" name="product_pic">
+              </div>
+              <div class="form-group">
+                <input type="submit" value="Add Product" class="btn btn-primary py-2 px-2">
+              </div>
+            </form>
+          
+          </div>
+        </div>
+      </div>
+    </section> 
+      
+  </body>
+</html>
+{% endblock %}

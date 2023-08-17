@@ -1,0 +1,93 @@
+{% extends 'seller-header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+  </head>
+  <body class="goto-here">
+		
+    <!-- END nav -->
+
+    <!-- Page Header Start -->
+    <div class="container-fluid bg-secondary mb-5">
+        <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 200px">
+            <h1 class="font-weight-semi-bold text-uppercase mb-3">Product Details</h1>
+            <div class="d-inline-flex">
+                <p class="m-0"><a href="/">Home</a></p>
+                <p class="m-0 px-2">-</p>
+                <p class="m-0">Seller Product Details</p>
+            </div>
+        </div>
+    </div>
+    <!--  End Page Header -->
+
+    <section class="ftco-section">
+    	<div class="container">
+    		<div class="row">
+    			<div class="col-lg-6 mb-5 ftco-animate">
+    				<a class="image-popup prod-img-bg "><img src="{{product.product_pic.url}}" class="img-fluid" alt="Colorlib Template" style="width: 300px; height: 400px;"></a>
+    			</div>
+    			<div class="col-lg-6 product-details pl-md-5 ftco-animate">
+    				<h3>{{product.product_name}}</h3>
+    				
+    				<p class="price"><span>Brand: {{product.product_brand}}</span></p>
+    				<p class="price"><span>Price: {{product.product_price}}</span></p>
+    				<p class="price"><span>Size: {{product.product_size}}</span></p>
+       
+          	<p>
+          		<a href="{% url 'seller-product-edit' pk=product.pk %}" class="btn btn-dark py-2 px-3 mr-2">EDIT</a>
+          		<a href="{% url 'seller-product-delete' pk=product.pk %}" class="btn btn-danger py-2 px-3">DELETE</a>
+          	</p>
+    			</div>
+    		</div>
+
+        </div>
+
+            </div>
+          </div>
+        </div>
+    	</div>
+    </section>
+		
+  <script>
+		$(document).ready(function(){
+
+		var quantitiy=0;
+		   $('.quantity-right-plus').click(function(e){
+		        
+		        // Stop acting like a button
+		        e.preventDefault();
+		        // Get the field name
+		        var quantity = parseInt($('#quantity').val());
+		        
+		        // If is not undefined
+		            
+		            $('#quantity').val(quantity + 1);
+
+		          
+		            // Increment
+		        
+		    });
+
+		     $('.quantity-left-minus').click(function(e){
+		        // Stop acting like a button
+		        e.preventDefault();
+		        // Get the field name
+		        var quantity = parseInt($('#quantity').val());
+		        
+		        // If is not undefined
+		      
+		            // Increment
+		            if(quantity>0){
+		            $('#quantity').val(quantity - 1);
+		            }
+		    });
+		    
+		});
+	</script>
+    
+  </body>
+</html>
+{% endblock %}

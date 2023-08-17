@@ -1,0 +1,167 @@
+{% extends 'seller-header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    
+</head>
+
+<body class="goto-here">
+        
+
+    <!-- Page Header Start -->
+    <div class="container-fluid bg-secondary mb-5">
+        <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 200px">
+            <h1 class="font-weight-semi-bold text-uppercase mb-3">View Product</h1>
+            <div class="d-inline-flex">
+                <p class="m-0"><a href="/">Home</a></p>
+                <p class="m-0 px-2">-</p>
+                <p class="m-0">Seller View Product</p>
+            </div>
+        </div>
+    </div>
+    <!--  End Page Header -->
+
+
+    <!-- Shop Start -->
+    <section class="ftco-section bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-lg-10 order-md-last">
+                    <div class="row">
+                        {% if msg %}
+                          <b style="color: blue">{{msg}}</b>
+                        {% endif %}
+                        {% for i in products %}
+                        <div class="col-sm-12 col-md-12 col-lg-4 ftco-animate d-flex">
+                            <div class="product d-flex flex-column">
+                                <a href="#" class="img-prod"><img class="img-fluid" src="{{i.product_pic.url}}" alt="Colorlib Template" style="width: 500px; height: 300px;">
+                                    <div class="overlay"></div>
+                                </a>
+                                <div class="text py-3 pb-4 px-3">
+                                    <div class="d-flex">
+                                        <div class="cat">
+                                            <span>{{i.product_brand}}</span>
+                                        </div>
+                                        
+                                    </div>
+                                    <h3><a href="#">{{i.product_name}}</a></h3>
+                                    <div class="pricing">
+                                        <p class="price"><span>₹{{i.product_price}}</span></p>
+                                    </div>
+                                        <a href="{% url 'seller-product-details' pk=i.pk %}" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>Seller Product Details</a>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+            
+                    </div>
+                    
+                    <div class="col-12 pb-1">
+                        <nav aria-label="Page navigation">
+                          <ul class="pagination justify-content-center mb-3">
+                            <li class="page-item disabled">
+                              <a class="page-link" href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                                <span class="sr-only">Previous</span>
+                              </a>
+                            </li>
+                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item">
+                              <a class="page-link" href="#" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                                <span class="sr-only">Next</span>
+                              </a>
+                            </li>
+                          </ul>
+                        </nav>
+                    </div>
+              
+                </div>
+
+                <div class="col-md-4 col-lg-2">
+                    <div class="sidebar">
+                            <div class="sidebar-box-2">
+                                <h2 class="heading">CATEGORIES</h2>
+                                <div class="fancy-collapse-panel">
+                  <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                     <div class="panel panel-default">
+                         <div class="panel-heading" role="tab" id="headingOne">
+                             <h4 class="panel-title">
+                                 <a href="{% url 'seller-all-products' %}">ALL
+                                 </a>
+                             </h4>
+                         </div>
+                     </div>
+                     <div class="panel panel-default">
+                         <div class="panel-heading" role="tab" id="headingOne">
+                             <h4 class="panel-title">
+                                 <a href="{% url 'seller-shirts' %}">SHIRTS
+                                 </a>
+                             </h4>
+                         </div>
+                     </div>
+
+                     <div class="panel panel-default">
+                         <div class="panel-heading" role="tab" id="headingOne">
+                             <h4 class="panel-title">
+                                 <a href="{% url 'seller-jeans' %}">JEANS
+                                 </a>
+                             </h4>
+                         </div>
+                     </div>
+
+                     <div class="panel panel-default">
+                         <div class="panel-heading" role="tab" id="headingOne">
+                             <h4 class="panel-title">
+                                 <a href="{% url 'seller-tshirts' %}">T-SHIRTS
+                                 </a>
+                             </h4>
+                         </div>
+                     </div>
+
+                     <div class="panel panel-default">
+                         <div class="panel-heading" role="tab" id="headingOne">
+                             <h4 class="panel-title">
+                                 <a href="{% url 'seller-jackets' %}">JACKETS
+                                 </a>
+                             </h4>
+                         </div>
+                     </div>
+                  </div>
+               </div>
+                            </div>
+                            
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </section>
+        
+        
+    <!-- Shop End -->
+
+
+    <!-- Footer Start -->
+    
+    <!-- Footer End -->
+
+
+    <!-- Back to Top -->
+   
+
+    <!-- JavaScript Libraries -->
+    
+    <!-- Contact Javascript File -->
+   
+    <!-- Template Javascript -->
+   
+</body>
+
+</html>
+{% endblock %}
